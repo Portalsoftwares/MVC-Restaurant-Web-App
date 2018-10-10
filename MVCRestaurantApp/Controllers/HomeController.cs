@@ -31,5 +31,8 @@ namespace MVCRestaurantApp.Controllers
             ViewBag.Message = "Our signature taste will make your tongue miss us...";
             return View();
         }
+
+
+
     }
 }

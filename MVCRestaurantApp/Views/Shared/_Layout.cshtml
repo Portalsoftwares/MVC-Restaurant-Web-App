@@ -22,9 +22,9 @@
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                     <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                    <li>@Html.ActionLink("Muldur KH Menu","Menu","Home")</li>
+                    <li>@Html.ActionLink("Muldur KH Menu", "Menu", "Home")</li>
                     <li>@Html.ActionLink("About", "About", "Home")</li>
-                 
+
                     <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
 
                 </ul>
@@ -32,16 +32,21 @@
             </div>
         </div>
     </div>
+
+
+
     <div class="container body-content">
         @RenderBody()
         <hr />
         <footer>
-            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+            <p>My ASP.NET Restaurant Application by Ozan Muldur.</p>
         </footer>
     </div>
 
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/bundles/sortable")
+
     @RenderSection("scripts", required: false)
 </body>
 </html>
