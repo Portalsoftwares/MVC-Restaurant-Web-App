@@ -2,6 +2,7 @@
     padding-top: 50px;
     background-image: url('Images/bg.jpg');
     padding-bottom: 20px;
+    color:white;
 }
 
 /* Set padding to keep content from hitting the edges */
@@ -27,5 +28,5 @@ textarea {
 /* row properties */
 
 .row {
-   
+   margin-top=20px;
 }
