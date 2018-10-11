@@ -7,6 +7,7 @@
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
 
+
 </head>
 <body>
     <div class="navbar navbar-inverse navbar-fixed-top">
@@ -17,7 +18,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                @Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                @Html.ActionLink("Muldur Kebab", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
@@ -25,8 +26,6 @@
                     <li>@Html.ActionLink("Menu", "Index", "Menus")</li>
                     <li>@Html.ActionLink("Recipe","Index","Recipes")</li>
                     
-
-                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
 
                 </ul>
                 @Html.Partial("_LoginPartial")
@@ -40,7 +39,7 @@
         @RenderBody()
         <hr />
         <footer>
-            <p>My ASP.NET Restaurant Application by Ozan Muldur.</p>
+            <p>This Restaurant Application is made in Server-Side Scripting - ASP.NET class by Ozan Muldur - 200389152.</p>
         </footer>
     </div>
 
