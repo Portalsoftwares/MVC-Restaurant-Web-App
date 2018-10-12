@@ -10,6 +10,7 @@ using MVCRestaurantApp.Models;
 
 namespace MVCRestaurantApp.Controllers
 {
+    
     public class MenusController : Controller
     {
         private RestaurantModel db = new RestaurantModel();
