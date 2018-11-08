@@ -13,7 +13,7 @@ namespace MVCRestaurantApp.Models
         }
 
         public virtual DbSet<Menu> Menus { get; set; }
-        public virtual DbSet<Recipe> Recipes { get; set; }
+        public virtual DbSet<Order> Orders { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
@@ -27,19 +27,20 @@ namespace MVCRestaurantApp.Models
 
             modelBuilder.Entity<Menu>()
                 .Property(e => e.Price)
-                .HasPrecision(4, 2);
+                .HasPrecision(6, 2);
 
-            modelBuilder.Entity<Recipe>()
-                .Property(e => e.Ingredients)
+            modelBuilder.Entity<Menu>()
+                .HasMany(e => e.Orders)
+                .WithRequired(e => e.Menu)
+                .WillCascadeOnDelete(false);
+
+            modelBuilder.Entity<Order>()
+                .Property(e => e.Customer_Name)
                 .IsUnicode(false);
 
-            modelBuilder.Entity<Recipe>()
-                .Property(e => e.Cooking_Method)
+            modelBuilder.Entity<Order>()
+                .Property(e => e.Address)
                 .IsUnicode(false);
-
-            modelBuilder.Entity<Recipe>()
-                .HasOptional(e => e.Menu)
-                .WithRequired(e => e.Recipe);
         }
     }
 }

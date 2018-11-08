@@ -1,8 +1,9 @@
 ﻿@model IEnumerable<MVCRestaurantApp.Models.Menu>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Menu";
     Layout = "~/Views/Shared/_Layout.cshtml";
+   
 }
 
 <h2>Index</h2>
@@ -10,11 +11,8 @@
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
-<table class="table">
+<table class="table table-bordered">
     <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Recipe.Ingredients)
-        </th>
         <th>
             @Html.DisplayNameFor(model => model.Meal_Name)
         </th>
@@ -33,9 +31,6 @@
 @foreach (var item in Model) {
     <tr>
         <td>
-            @Html.DisplayFor(modelItem => item.Recipe.Ingredients)
-        </td>
-        <td>
             @Html.DisplayFor(modelItem => item.Meal_Name)
         </td>
         <td>
@@ -47,10 +42,11 @@
         <td>
             @Html.DisplayFor(modelItem => item.Price)
         </td>
+
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.Menu_ID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.Menu_ID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.Menu_ID })
+            @Html.ActionLink("Edit", "Edit", new { id = item.Menu_Id }) |
+            @Html.ActionLink("Details", "Details", new { id = item.Menu_Id }) |
+            @Html.ActionLink("Delete", "Delete", new { id = item.Menu_Id })
         </td>
     </tr>
 }

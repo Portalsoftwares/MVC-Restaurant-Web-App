@@ -6,21 +6,23 @@ namespace MVCRestaurantApp.Models
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
 
-    [Table("Recipe")]
-    public partial class Recipe
+    [Table("Order")]
+    public partial class Order
     {
         [Key]
-        public int Recipe_ID { get; set; }
+        public int Order_Id { get; set; }
 
         [Required]
         [StringLength(50)]
-        public string Ingredients { get; set; }
+        public string Customer_Name { get; set; }
 
         [Required]
         [StringLength(50)]
-        public string Cooking_Method { get; set; }
+        public string Address { get; set; }
 
-        public int Cooking_Time { get; set; }
+        public int Menu_Id { get; set; }
+
+        public int Quantity { get; set; }
 
         public virtual Menu Menu { get; set; }
     }

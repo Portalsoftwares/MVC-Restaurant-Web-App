@@ -58,11 +58,11 @@ namespace MVCRestaurantApp
             //   appId: "",
             //   appSecret: "");
 
-            //app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions()
-            //{
-            //    ClientId = "",
-            //    ClientSecret = ""
-            //});
+            app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions()
+            {
+               ClientId = "will-go-here",
+               ClientSecret = "will-go-here"
+            });
         }
     }
 }

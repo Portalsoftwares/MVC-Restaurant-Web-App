@@ -9,8 +9,7 @@ using System.Web.Mvc;
 using MVCRestaurantApp.Models;
 
 namespace MVCRestaurantApp.Controllers
-{
-    
+{   [Authorize]
     public class MenusController : Controller
     {
         private RestaurantModel db = new RestaurantModel();
@@ -18,10 +17,10 @@ namespace MVCRestaurantApp.Controllers
         // GET: Menus
         public ActionResult Index()
         {
-            var menus = db.Menus.Include(m => m.Recipe);
-            return View(menus.ToList());
+            return View(db.Menus.ToList());
         }
 
+        [AllowAnonymous]
         // GET: Menus/Details/5
         public ActionResult Details(int? id)
         {
@@ -38,9 +37,9 @@ namespace MVCRestaurantApp.Controllers
         }
 
         // GET: Menus/Create
-        public ActionResult Create()
+        public ActionResult Create() 
         {
-            ViewBag.Menu_ID = new SelectList(db.Recipes, "Recipe_ID", "Ingredients");
+           
             return View();
         }
 
@@ -49,7 +48,7 @@ namespace MVCRestaurantApp.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Menu_ID,Meal_Name,Meal_Type,Calories,Price")] Menu menu)
+        public ActionResult Create([Bind(Include = "Menu_Id,Meal_Name,Meal_Type,Calories,Price")] Menu menu)
         {
             if (ModelState.IsValid)
             {
@@ -57,8 +56,7 @@ namespace MVCRestaurantApp.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-
-            ViewBag.Menu_ID = new SelectList(db.Recipes, "Recipe_ID", "Ingredients", menu.Menu_ID);
+           
             return View(menu);
         }
 
@@ -74,7 +72,6 @@ namespace MVCRestaurantApp.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.Menu_ID = new SelectList(db.Recipes, "Recipe_ID", "Ingredients", menu.Menu_ID);
             return View(menu);
         }
 
@@ -83,7 +80,7 @@ namespace MVCRestaurantApp.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Menu_ID,Meal_Name,Meal_Type,Calories,Price")] Menu menu)
+        public ActionResult Edit([Bind(Include = "Menu_Id,Meal_Name,Meal_Type,Calories,Price")] Menu menu)
         {
             if (ModelState.IsValid)
             {
@@ -91,7 +88,6 @@ namespace MVCRestaurantApp.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.Menu_ID = new SelectList(db.Recipes, "Recipe_ID", "Ingredients", menu.Menu_ID);
             return View(menu);
         }
 
