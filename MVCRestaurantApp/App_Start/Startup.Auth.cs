@@ -46,9 +46,9 @@ namespace MVCRestaurantApp
             app.UseTwoFactorRememberBrowserCookie(DefaultAuthenticationTypes.TwoFactorRememberBrowserCookie);
 
             // Uncomment the following lines to enable logging in with third party login providers
-            //app.UseMicrosoftAccountAuthentication(
-            //    clientId: "",
-            //    clientSecret: "");
+            app.UseMicrosoftAccountAuthentication(
+               clientId: "db0178fe-e69f-4608-b378-2e9e600ed893",
+               clientSecret: "sxsiVDZ3671-{fioKORV6}$");
 
             //app.UseTwitterAuthentication(
             //   consumerKey: "",
