@@ -6,6 +6,7 @@ using Microsoft.Owin.Security.Cookies;
 using Microsoft.Owin.Security.Google;
 using Owin;
 using MVCRestaurantApp.Models;
+using System.Configuration;
 
 namespace MVCRestaurantApp
 {
@@ -47,8 +48,8 @@ namespace MVCRestaurantApp
 
             // Uncomment the following lines to enable logging in with third party login providers
             app.UseMicrosoftAccountAuthentication(
-               clientId: "db0178fe-e69f-4608-b378-2e9e600ed893",
-               clientSecret: "sxsiVDZ3671-{fioKORV6}$");
+               clientId: ConfigurationManager.AppSettings["MicrosoftClientId"],
+               clientSecret: ConfigurationManager.AppSettings["MicrosoftClientSecret"]);
 
             //app.UseTwitterAuthentication(
             //   consumerKey: "",
@@ -60,8 +61,8 @@ namespace MVCRestaurantApp
 
             app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions()
             {
-               ClientId = "924092119543-7gqg5lhuftsb1ccdepslpb66tnel38jj.apps.googleusercontent.com",
-               ClientSecret = "GJWWfRlkmQtbzEG-5nMhXSAK"
+                ClientId = ConfigurationManager.AppSettings["GoogleClientId"],
+                ClientSecret = ConfigurationManager.AppSettings["GoogleClientSecret"]
             });
         }
     }
