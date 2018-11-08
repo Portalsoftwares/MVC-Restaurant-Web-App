@@ -60,8 +60,8 @@ namespace MVCRestaurantApp
 
             app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions()
             {
-               ClientId = "will-go-here",
-               ClientSecret = "will-go-here"
+               ClientId = "924092119543-7gqg5lhuftsb1ccdepslpb66tnel38jj.apps.googleusercontent.com",
+               ClientSecret = "GJWWfRlkmQtbzEG-5nMhXSAK"
             });
         }
     }
