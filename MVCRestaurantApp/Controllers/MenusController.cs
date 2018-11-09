@@ -15,6 +15,7 @@ namespace MVCRestaurantApp.Controllers
         private RestaurantModel db = new RestaurantModel();
 
         // GET: Menus
+        [AllowAnonymous]
         public ActionResult Index()
         {
             return View(db.Menus.ToList());

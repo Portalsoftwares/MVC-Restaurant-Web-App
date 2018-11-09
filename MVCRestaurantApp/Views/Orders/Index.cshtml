@@ -24,10 +24,14 @@
         <th>
             @Html.DisplayNameFor(model => model.Quantity)
         </th>
+        <th>
+          Picture
+        </th>
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
+@foreach (var item in Model)
+{
     <tr>
         <td>
             @Html.DisplayFor(modelItem => item.Menu.Meal_Name)
@@ -42,9 +46,15 @@
             @Html.DisplayFor(modelItem => item.Quantity)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.Order_Id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.Order_Id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.Order_Id })
+          
+            @{string url = "../Content/Images/" + item.Menu_Id + ".jpg";
+            }
+            <img src="@url" clas="img-responsive" style="width:150px;height:120px;border-radius:5px;"
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id = item.Order_Id }) |
+            @Html.ActionLink("Details", "Details", new { id = item.Order_Id }) |
+            @Html.ActionLink("Delete", "Delete", new { id = item.Order_Id })
         </td>
     </tr>
 }

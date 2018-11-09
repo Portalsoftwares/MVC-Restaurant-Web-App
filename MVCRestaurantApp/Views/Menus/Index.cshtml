@@ -3,13 +3,15 @@
 @{
     ViewBag.Title = "Menu";
     Layout = "~/Views/Shared/_Layout.cshtml";
-   
+
 }
 
 <h2>Index</h2>
 
 <p>
+    @if (User.Identity.IsAuthenticated) { 
     @Html.ActionLink("Create New", "Create")
+    }
 </p>
 <table class="table table-bordered">
     <tr>
