@@ -220,12 +220,7 @@
     <Content Include="Content\Images\bg.jpg" />
     <Content Include="Content\Images\chef.jpg" />
     <Content Include="Content\Images\history.jpeg" />
-    <Content Include="Content\Images\kebap.jpg" />
     <Content Include="Content\Images\2.jpg" />
-    <Content Include="Content\Images\kebap3.jpg" />
-    <Content Include="Content\Images\kebap4.jpg" />
-    <Content Include="Content\Images\kebap5.jpg" />
-    <Content Include="Content\Images\kebap6.jpg" />
     <Content Include="Content\Images\middle.jpg" />
     <Content Include="Content\Images\muldurlogo.png" />
     <Content Include="Content\Images\organic.jpg" />
