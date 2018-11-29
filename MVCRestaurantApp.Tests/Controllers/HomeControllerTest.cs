@@ -78,7 +78,7 @@ namespace MVCRestaurantApp.Tests.Controllers
                 var actual = (List<Menu>)((ViewResult)controller.Index()).Model;
 
                 // assert
-                CollectionAssert.AreEqual(menus.OrderBy(a => a.Artist.Name).ThenBy(a => a.Title).ToList(), actual);
+                CollectionAssert.AreEqual(menus.ToList(), actual);
             }
             #endregion
 
@@ -108,10 +108,10 @@ namespace MVCRestaurantApp.Tests.Controllers
             public void DetailsValidId()
             {
                 // act - cast the model as an Album object
-                Album actual = (Album)((ViewResult)controller.Details(300)).Model;
+                Menu actual = (Menu)((ViewResult)controller.Details(300)).Model;
 
                 // assert - is this the first mock album in our array?
-                Assert.AreEqual(albums[2], actual);
+                Assert.AreEqual(menus[2], actual);
             }
 
             [TestMethod]
@@ -150,25 +150,7 @@ namespace MVCRestaurantApp.Tests.Controllers
                 Assert.AreEqual("Error", result.ViewName);
             }
 
-            [TestMethod]
-            public void EditViewBagArtist()
-            {
-                // act
-                ViewResult actual = (ViewResult)controller.Edit(100);
-
-                // assert
-                Assert.IsNotNull(actual.ViewBag.ArtistId);
-            }
-
-            [TestMethod]
-            public void EditViewBagGenre()
-            {
-                // act
-                ViewResult actual = (ViewResult)controller.Edit(100);
-
-                // assert
-                Assert.IsNotNull(actual.ViewBag.GenreId);
-            }
+ 
 
             [TestMethod]
             public void EditViewLoads()
@@ -184,10 +166,10 @@ namespace MVCRestaurantApp.Tests.Controllers
             public void EditLoadsAlbum()
             {
                 // act
-                Album actual = (Album)((ViewResult)controller.Edit(100)).Model;
+                Menu actual = (Menu)((ViewResult)controller.Edit(100)).Model;
 
                 // assert
-                Assert.AreEqual(albums[0], actual);
+                Assert.AreEqual(menus[0], actual);
             }
             #endregion
 
@@ -202,26 +184,6 @@ namespace MVCRestaurantApp.Tests.Controllers
 
                 // assert
                 Assert.AreEqual("Create", result.ViewName);
-            }
-
-            [TestMethod]
-            public void CreateViewBagArtist()
-            {
-                // act
-                ViewResult result = (ViewResult)controller.Create();
-
-                // assert
-                Assert.IsNotNull(result.ViewBag.ArtistId);
-            }
-
-            [TestMethod]
-            public void CreateViewBagGenre()
-            {
-                // act
-                ViewResult result = (ViewResult)controller.Create();
-
-                // assert
-                Assert.IsNotNull(result.ViewBag.GenreId);
             }
 
             #endregion
@@ -260,13 +222,13 @@ namespace MVCRestaurantApp.Tests.Controllers
             }
 
             [TestMethod]
-            public void DeleteValidIdLoadsAlbum()
+            public void DeleteValidIdLoadsMenu()
             {
                 // act
-                Album result = (Album)((ViewResult)controller.Delete(100)).Model;
+                Menu result = (Menu)((ViewResult)controller.Delete(100)).Model;
 
                 // assert
-                Assert.AreEqual(albums[0], result);
+                Assert.AreEqual(menus[0], result);
             }
 
             #endregion
@@ -278,45 +240,18 @@ namespace MVCRestaurantApp.Tests.Controllers
             public void EditPostLoadsIndex()
             {
                 // act
-                RedirectToRouteResult result = (RedirectToRouteResult)controller.Edit(albums[0]);
+                RedirectToRouteResult result = (RedirectToRouteResult)controller.Edit(menus[0]);
 
                 // assert
                 Assert.AreEqual("Index", result.RouteValues["action"]);
             }
 
-            [TestMethod]
-            public void EditPostViewBagArtist()
-            {
-                // arrange
-                Album invalid = new Album { AlbumId = 27 };
-                controller.ModelState.AddModelError("Error", "Won't Save");
-
-                // act
-                ViewResult result = (ViewResult)controller.Edit(invalid);
-
-                // assert
-                Assert.IsNotNull(result.ViewBag.ArtistId);
-            }
-
-            [TestMethod]
-            public void EditPostViewBagGenre()
-            {
-                // arrange
-                Album invalid = new Album { AlbumId = 27 };
-                controller.ModelState.AddModelError("Error", "Won't Save");
-
-                // act
-                ViewResult result = (ViewResult)controller.Edit(invalid);
-
-                // assert
-                Assert.IsNotNull(result.ViewBag.GenreId);
-            }
-
+            
             [TestMethod]
             public void EditPostInvalidLoadsView()
             {
                 // arrange
-                Album invalid = new Album { AlbumId = 27 };
+                Menu invalid = new Menu { Menu_Id = 27 };
                 controller.ModelState.AddModelError("Error", "Won't Save");
 
                 // act
@@ -327,14 +262,14 @@ namespace MVCRestaurantApp.Tests.Controllers
             }
 
             [TestMethod]
-            public void EditPostInvalidLoadsAlbum()
+            public void EditPostInvalidLoadsMenu()
             {
                 // arrange
-                Album invalid = new Album { AlbumId = 100 };
+                Menu invalid = new Menu { Menu_Id = 100 };
                 controller.ModelState.AddModelError("Error", "Won't Save");
 
                 // act
-                Album result = (Album)((ViewResult)controller.Edit(invalid)).Model;
+                Menu result = (Menu)((ViewResult)controller.Edit(invalid)).Model;
 
                 // assert
                 Assert.AreEqual(invalid, result);
@@ -345,10 +280,10 @@ namespace MVCRestaurantApp.Tests.Controllers
             // POST: Albums/Create
             #region
             [TestMethod]
-            public void CreateValidAlbum()
+            public void CreateValidMenu()
             {
                 // arrange
-                Album newAlbum = new Album
+                Menu newMenu = new Menu
                 {
                     AlbumId = 400,
                     Title = "Four Hundred",
