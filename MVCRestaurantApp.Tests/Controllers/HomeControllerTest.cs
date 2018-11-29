@@ -69,9 +69,9 @@ namespace MVCRestaurantApp.Tests.Controllers
             }
 
             [TestMethod]
-            public void IndexReturnsAlbums()
+            public void IndexReturnsMenus()
             {
-                // act - does the viewresults Model equal a list of albums?
+                // act
                 var actual = (List<Menu>)((ViewResult)controller.Index()).Model;
 
                 // assert
@@ -79,7 +79,7 @@ namespace MVCRestaurantApp.Tests.Controllers
             }
             #endregion
 
-            // GET: Albums/Details/100
+
             #region
             [TestMethod]
             public void DetailsNoId()
@@ -104,10 +104,10 @@ namespace MVCRestaurantApp.Tests.Controllers
             [TestMethod]
             public void DetailsValidId()
             {
-                // act - cast the model as an Album object
+                // act 
                 Menu actual = (Menu)((ViewResult)controller.Details(300)).Model;
 
-                // assert - is this the first mock album in our array?
+                // assert 
                 Assert.AreEqual(menus[2], actual);
             }
 
@@ -122,7 +122,7 @@ namespace MVCRestaurantApp.Tests.Controllers
             }
             #endregion
 
-            // GET: Albums/Edit/5
+
             #region
             [TestMethod]
             public void EditNoId()
@@ -160,7 +160,7 @@ namespace MVCRestaurantApp.Tests.Controllers
             }
 
             [TestMethod]
-            public void EditLoadsAlbum()
+            public void EditLoadsMenu()
             {
                 // act
                 Menu actual = (Menu)((ViewResult)controller.Edit(100)).Model;
@@ -170,7 +170,6 @@ namespace MVCRestaurantApp.Tests.Controllers
             }
             #endregion
 
-            // GET: Albums/Create
             #region
 
             [TestMethod]
@@ -185,7 +184,7 @@ namespace MVCRestaurantApp.Tests.Controllers
 
             #endregion
 
-            // GET: Albums/Delete
+
             #region
 
             [TestMethod]
@@ -230,7 +229,6 @@ namespace MVCRestaurantApp.Tests.Controllers
 
             #endregion
 
-            // POST: Albums/Edit
             #region
 
             [TestMethod]
@@ -274,7 +272,6 @@ namespace MVCRestaurantApp.Tests.Controllers
 
             #endregion
 
-            // POST: Albums/Create
             #region
             [TestMethod]
             public void CreateValidMenu()
@@ -313,7 +310,6 @@ namespace MVCRestaurantApp.Tests.Controllers
 
             #endregion
 
-            // POST: Albums/DeleteConfirmed/100
             #region
             [TestMethod]
             public void DeleteConfirmedNoId()
