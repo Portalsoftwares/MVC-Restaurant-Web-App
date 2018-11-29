@@ -12,13 +12,25 @@ namespace MVCRestaurantApp.Controllers
 {   [Authorize]
     public class MenusController : Controller
     {
-        private RestaurantModel db = new RestaurantModel();
+        private MenuMock db;
+
+        public MenusController()
+        {
+            // if nothing passed to constructor, connect to the db (this is the default)
+            this.db = new EFMenus();
+        }
+
+        public MenusController(MenuMock menuMock)
+        {
+            // if we pass a mock object to the constructor, we are unit testing so no db
+            this.db = menuMock;
+        }
 
         // GET: Menus
         [AllowAnonymous]
         public ActionResult Index()
         {
-            return View(db.Menus.ToList());
+            return View("Index", db.Menus.ToList());
         }
 
         [AllowAnonymous]
@@ -27,21 +39,21 @@ namespace MVCRestaurantApp.Controllers
         {
             if (id == null)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                return View("Error");
             }
-            Menu menu = db.Menus.Find(id);
+            Menu menu = db.Menus.SingleOrDefault(a => a.Menu_Id == id);
             if (menu == null)
             {
-                return HttpNotFound();
+                return View("Error");
             }
-            return View(menu);
+            return View("Details", menu);
         }
 
         // GET: Menus/Create
         public ActionResult Create() 
         {
            
-            return View();
+            return View("Create");
         }
 
         // POST: Menus/Create
@@ -53,12 +65,11 @@ namespace MVCRestaurantApp.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Menus.Add(menu);
-                db.SaveChanges();
+                db.Save(menu);
                 return RedirectToAction("Index");
             }
-           
-            return View(menu);
+
+            return View("Create", menu);
         }
 
         // GET: Menus/Edit/5
@@ -66,14 +77,14 @@ namespace MVCRestaurantApp.Controllers
         {
             if (id == null)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                return View("Error");
             }
-            Menu menu = db.Menus.Find(id);
+            Menu menu = db.Menus.SingleOrDefault(a => a.Menu_Id == id);
             if (menu == null)
             {
-                return HttpNotFound();
+                return View("Error");
             }
-            return View(menu);
+            return View("Edit", menu);
         }
 
         // POST: Menus/Edit/5
@@ -89,7 +100,7 @@ namespace MVCRestaurantApp.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(menu);
+            return View("Edit", menu);
         }
 
         // GET: Menus/Delete/5
@@ -97,14 +108,14 @@ namespace MVCRestaurantApp.Controllers
         {
             if (id == null)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                return View("Error");
             }
-            Menu menu = db.Menus.Find(id);
+            Menu menu = db.Menus.SingleOrDefault(a => a.Menu_Id == id);
             if (menu == null)
             {
-                return HttpNotFound();
+                return View("Error");
             }
-            return View(menu);
+            return View("Delete", menu);
         }
 
         // POST: Menus/Delete/5
@@ -112,19 +123,31 @@ namespace MVCRestaurantApp.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Menu menu = db.Menus.Find(id);
-            db.Menus.Remove(menu);
-            db.SaveChanges();
+            
+            if (id == null)
+            {
+                return View("Error");
+            }
+
+            Menu menu = db.Menus.SingleOrDefault(a => a.Menu_Id == id);
+
+            if (menu == null)
+            {
+                return View("Error");
+            }
+
+            db.Delete(menu);
+
             return RedirectToAction("Index");
         }
 
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                db.Dispose();
-            }
-            base.Dispose(disposing);
-        }
+        //protected override void Dispose(bool disposing)
+        //{
+        //    if (disposing)
+        //    {
+        //        db.Dispose();
+        //    }
+        //    base.Dispose(disposing);
+        //}
     }
 }
