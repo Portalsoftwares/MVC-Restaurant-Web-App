@@ -96,8 +96,7 @@ namespace MVCRestaurantApp.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Entry(menu).State = EntityState.Modified;
-                db.SaveChanges();
+                db.Save(menu); 
                 return RedirectToAction("Index");
             }
             return View("Edit", menu);
@@ -121,7 +120,7 @@ namespace MVCRestaurantApp.Controllers
         // POST: Menus/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
+        public ActionResult DeleteConfirmed(int? id)
         {
             
             if (id == null)

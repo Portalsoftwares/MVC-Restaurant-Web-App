@@ -28,7 +28,7 @@ namespace MVCRestaurantApp.Tests.Controllers
         }
 
         [TestClass]
-        public class AlbumsControllerTest
+        public class MenusControllerTest
         {
             Mock<MenuMock> mock;
             List<Menu> menus;
@@ -42,14 +42,11 @@ namespace MVCRestaurantApp.Tests.Controllers
 
                 menus = new List<Menu>
             {
-                new Album { AlbumId = 100, Title = "One Hundred", Price = 6.99m, Artist = new Artist {
-                    ArtistId = 4000, Name = "Some One" }
+                new Menu { Menu_Id=100, Meal_Name="Burger", Meal_Type="FastFood", Calories=2000,Price=20
                 },
-                new Album { AlbumId = 200, Title = "Two Hundred", Price = 7.99m, Artist = new Artist {
-                    ArtistId = 4001, Name = "Another Person" }
+                new Menu { Menu_Id=200, Meal_Name="Pizza", Meal_Type="FastFood", Calories=3000,Price=30
                 },
-                new Album { AlbumId = 300, Title = "Three Hundred", Price = 8.99m, Artist = new Artist {
-                    ArtistId = 4002, Name = "Third Artist" }
+                new Menu { Menu_Id=300, Meal_Name="Fries", Meal_Type="UltraFastFood", Calories=1000,Price=10
                 }
             };
 
@@ -59,7 +56,7 @@ namespace MVCRestaurantApp.Tests.Controllers
                 controller = new MenusController(mock.Object);
             }
 
-            // GET: Albums
+
             #region
             [TestMethod]
             public void IndexReturnsView()
@@ -285,28 +282,25 @@ namespace MVCRestaurantApp.Tests.Controllers
                 // arrange
                 Menu newMenu = new Menu
                 {
-                    AlbumId = 400,
-                    Title = "Four Hundred",
-                    Price = 9.99m,
-                    Artist = new Artist
-                    {
-                        ArtistId = 4004,
-                        Name = "Some Four"
-                    }
+                    Menu_Id = 400,
+                    Meal_Name = "Donner",
+                    Meal_Type = "FastFood",
+                    Calories = 5000,
+                    Price = 15
                 };
 
                 // act
-                RedirectToRouteResult result = (RedirectToRouteResult)controller.Create(newAlbum);
+                RedirectToRouteResult result = (RedirectToRouteResult)controller.Create(newMenu);
 
                 // assert
                 Assert.AreEqual("Index", result.RouteValues["action"]);
             }
 
             [TestMethod]
-            public void CreateInvalidAlbum()
+            public void CreateInvalidMenu()
             {
                 // arrange
-                Album invalid = new Album();
+                Menu invalid = new Menu();
 
                 // act
                 controller.ModelState.AddModelError("Cannot create", "create exception");
@@ -316,33 +310,7 @@ namespace MVCRestaurantApp.Tests.Controllers
                 Assert.AreEqual("Create", result.ViewName);
             }
 
-            [TestMethod]
-            public void CreateInvalidViewBagArtist()
-            {
-                // arrange
-                Album invalid = new Album();
 
-                // act
-                controller.ModelState.AddModelError("Cannot create", "create exception");
-                ViewResult result = (ViewResult)controller.Create(invalid);
-
-                // assert
-                Assert.IsNotNull(result.ViewBag.ArtistId);
-            }
-
-            [TestMethod]
-            public void CreateInvalidViewBagGenre()
-            {
-                // arrange
-                Album invalid = new Album();
-
-                // act
-                controller.ModelState.AddModelError("Cannot create", "create exception");
-                ViewResult result = (ViewResult)controller.Create(invalid);
-
-                // assert
-                Assert.IsNotNull(result.ViewBag.GenreId);
-            }
             #endregion
 
             // POST: Albums/DeleteConfirmed/100
